@@ -102,18 +102,43 @@ const displayIssues = (issues) => {
 
       // Populate modal content dynamically
       document.getElementById("modal-title").innerText = issue.title;
+
+      // Status section with responsive layout
+      document.getElementById("modal-status").className =
+        "flex flex-col sm:flex-row sm:items-center gap-2 lg:gap-3 mb-4";
       document.getElementById("modal-status").innerHTML = `
-        <span class="badge badge-success text-white">Opened</span>
-        <span ><i class="fa-solid fa-circle "></i> ${issue.author}</span>
-        <span ><i class="fa-solid fa-circle"></i> ${issue.createdAt}</span>
-      `;
+    <!-- Status badge always first row on small screens -->
+    <span class="badge badge-success text-white text-sm lg:text-base">${issue.status || "Opened"}</span>
+
+    <!-- Author + Date go to second row on small screens -->
+    <div class="flex flex-wrap gap-2 text-sm lg:text-base">
+      <span><i class="fa-solid fa-circle"></i> ${issue.author}</span>
+      <span><i class="fa-solid fa-circle"></i> ${issue.createdAt}</span>
+    </div>
+  `;
+
+      // Tags section with wrapping
+      document.getElementById("modal-tags").className =
+        "flex flex-wrap gap-2 lg:gap-3 mb-4";
       document.getElementById("modal-tags").innerHTML = `
-        <span class="badge badge-outline bg-[#FEECEC] text-[#EF4444]">${issue.labels[0]?.toUpperCase()}</span>
-        <span class="badge badge-outline bg-yellow-100 text-[#D97706]">${issue.labels[1]?.toUpperCase()}</span>
-      `;
+    <span class="badge badge-outline bg-[#FEECEC] text-[#EF4444] text-sm lg:text-base">${issue.labels[0]?.toUpperCase()}</span>
+    <span class="badge badge-outline bg-yellow-100 text-[#D97706] text-sm lg:text-base">${issue.labels[1]?.toUpperCase()}</span>
+  `;
+
+      // Description
+      document.getElementById("modal-description").className =
+        "text-gray-600 text-sm lg:text-base mb-6";
       document.getElementById("modal-description").innerText =
         issue.description;
+
+      // Assignee
+      document.getElementById("modal-assignee").className =
+        "font-semibold text-sm lg:text-base";
       document.getElementById("modal-assignee").innerText = issue.author;
+
+      // Priority
+      document.getElementById("modal-priority").className =
+        "badge bg-red-500 text-white border-none p-3 text-sm lg:text-base";
       document.getElementById("modal-priority").innerText = issue.priority;
 
       modal.showModal();
