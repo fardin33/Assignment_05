@@ -59,6 +59,7 @@
             <!-- Username : admin -->
             <label class="text-[#1F2937] text-sm font-medium">Username</label>
             <input
+            id="username"
               type="text"
               placeholder="Enter Username"
               class="w-full mt-1 mb-1 px-3 py-2 border border-[#E4E4E7] rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -69,6 +70,7 @@
             <!-- Password : admin1234 -->
             <label class="text-[#1F2937] text-sm font-medium">Password</label>
             <input
+            id="password"
               type="password"
               placeholder="Enter Password"
               class="w-full mt-1 mb-1 px-3 py-2 border border-[#E4E4E7] rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -78,6 +80,7 @@
 
             <!-- Button -->
             <button
+              onclick="login()"
               class="mt-6 w-full px-3 py-2 rounded-lg text-white font-medium bg-gradient-to-r bg-[#4A00FF] hover:opacity-90 transition"
             >
               Sign In
@@ -107,6 +110,6 @@
       </body>
     </html>
 
-    <script src=""></script>
+    <script src="./js/index.js"></script>
   </body>
 </html>

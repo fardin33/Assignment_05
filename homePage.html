@@ -68,7 +68,7 @@
     </header>
 
     <!-- Main Section -->
-    <main class="max-w-[80%] mx-auto px-6 py-8 min-h-screen">
+    <main class="max-w-[85%] mx-auto px-6 py-8 min-h-screen">
       <!--================= All, Open , Closed Tabs =============-->
       <div class="bg-white w-full rounded-lg shadow-sm p-5 inline-flex gap-2">
         <button
@@ -101,7 +101,12 @@
               class="w-11 h-11 bg-purple-100 rounded-full p-1"
             />
             <div>
-              <h2 class="font-semibold text-xl text-[#1F2937]">50 Issues</h2>
+              <h2
+                id="issues-count"
+                class="font-semibold text-xl text-[#1F2937]"
+              >
+                50 Issues
+              </h2>
               <p class="text-[15px] text-[#64748B]">
                 Track and manage your project issues
               </p>
@@ -121,57 +126,15 @@
           </div>
         </div>
 
-        <!-- ================= Grid Boxes ===============-->
+        <!-- ================= Grid Card Boxes ===============-->
         <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          <!--================ Card Design ==============-->
-          <div
-            class="border-t-4 border-[#00A96E] rounded-xl p-4 shadow-md hover:shadow-lg transition"
-          >
-            <div class="flex justify-between items-center mb-3">
-              <img
-                src="./assets/images/Open-Status.png"
-                alt="Not Found"
-                class="w-8 h-8"
-              />
-              <span
-                class="bg-[#FEECEC] text-[#EF4444] font-medium text-xs px-5 py-1.5 rounded-full"
-                >HIGH</span
-              >
-            </div>
-
-            <h3 class="font-semibold text-sm mb-1">
-              Fix Navigation Menu On Mobile <br />
-              Devices
-            </h3>
-
-            <p class="text-xs text-gray-500 mb-3">
-              The navigation menu doesn't collapse properly on mobile devices.
-            </p>
-
-            <div
-              class="flex gap-2 mb-4 items-center pb-4 border-b-2 border-[#E4E4E7]"
-            >
-              <span
-                class="bg-[#FEECEC] text-[#EF4444] font-medium text-xs px-4 py-1.5 rounded-full"
-              >
-                <i class="fa-solid fa-bug"></i>
-                BUG</span
-              >
-              <span
-                class="bg-yellow-100 text-[#D97706] text-xs font-medium px-3 py-1.5 rounded-full"
-              >
-                <i class="fa-solid fa-life-ring"></i>
-                HELP WANTED</span
-              >
-            </div>
-
-            <p class="text-xs text-[#64748B] mb-2">#1 by john_doe</p>
-            <p class="text-xs text-[#64748B]">11/15/2024</p>
-          </div>
-        </div>
+          id="issues-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 p-7"
+        ></div>
       </div>
     </main>
+
+    <!-- Js Linkup -->
+    <script src="./js/index.js"></script>
   </body>
 </html>
