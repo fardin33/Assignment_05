@@ -14,9 +14,98 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Linkup : Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styling -->
+    <style>
+      .geist {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
   </head>
-  <body>
-    <h1>Code Start</h1>
+      <body class="geist bg-[#F8FAFC] min-h-screen">
+          
+        <!--=========================== Login Form ============================-->
+        <!-- Main Card Body Container -->
+        <div class="flex items-center justify-center min-h-[100vh]">
+
+          <!-- Inside Parent Card container -->
+          <div class="bg-white w-[400px] rounded-lg shadow-md p-8">
+
+            <!-- Github Image -->
+            <div class="flex justify-center mb-4">
+              <div
+                class="w-20 h-20 rounded-full flex items-center justify-center"
+              >
+                <img src="./assets/images/github-logo.png" alt="Not Found" />
+              </div>
+            </div>
+
+            <!-- Title Text -->
+            <h2 class="text-[#1F2937] text-xl font-semibold text-center">
+              GitHub Issues Tracker
+            </h2>
+
+            <!-- Subtitle Text -->
+            <p class=" text-[#64748B] text-sm text-center mb-6">
+              Sign in to manage your issues
+            </p>
+
+            <!-- Username : admin -->
+            <label class="text-[#1F2937] text-sm font-medium">Username</label>
+            <input
+              type="text"
+              placeholder="Enter Username"
+              class="w-full mt-1 mb-1 px-3 py-2 border border-[#E4E4E7] rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+
+            <p class="text-xs text-[#4A00FF] mt-1 mb-4">Default: admin</p>
+
+            <!-- Password : admin1234 -->
+            <label class="text-[#1F2937] text-sm font-medium">Password</label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              class="w-full mt-1 mb-1 px-3 py-2 border border-[#E4E4E7] rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+
+            <p class="text-xs text-[#4A00FF]  mt-1 mb-4">Default: admin123</p>
+
+            <!-- Button -->
+            <button
+              class="mt-6 w-full px-3 py-2 rounded-lg text-white font-medium bg-gradient-to-r bg-[#4A00FF] hover:opacity-90 transition"
+            >
+              Sign In
+            </button>
+
+            <!-- OR -->
+            <div class="flex items-center my-4 mt-6">
+           <div class="flex-1 border-t border-gray-300"></div>
+           <span class="px-3 text-sm text-[#1F2937]">OR</span>
+           <div class="flex-1 border-t border-gray-300"></div>
+           </div>
+
+            <!-- Demo Credentials -->
+
+            <div>
+               <p class="text-center text-[#64748B] text-[13px] mb-2">Demo Credentials:</p>
+                 <div
+              class="bg-[#f4f5f7] p-4 rounded-md text-sm text-gray-700 text-center"
+            >
+              <p><strong class="text-[#1F2937] text-sm font-semibold">Username: </strong> admin</p>
+              <p><strong class="text-[#1F2937] text-sm font-semibold">Password: </strong> admin123</p>
+            </div>
+            </div>
+          </div>
+        </div>
+         <!--======================== Login Form End Here =====================-->
+      </body>
+    </html>
 
     <script src=""></script>
   </body>
