@@ -131,6 +131,44 @@
           id="issues-container"
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 p-7"
         ></div>
+
+        <!--================ Modal Codes ==============-->
+        <dialog id="issue_modal" class="modal">
+          <div class="modal-box max-w-2xl rounded-xl p-6">
+            <!--============= Modal Title : =============-->
+            <h2 id="modal-title" class="text-2xl font-semibold mb-2"></h2>
+            <div
+              id="modal-status"
+              class="flex items-center gap-3 text-[15px] text-gray-500 mb-4"
+            ></div>
+            <div id="modal-tags" class="flex gap-2 mb-4"></div>
+            <p id="modal-description" class="text-gray-600 mb-6"></p>
+            <div
+              class="bg-gray-100 rounded-lg p-4 flex justify-between items-center mb-6"
+            >
+              <div>
+                <p class="text-sm text-gray-500 mb-2">Assignee:</p>
+                <p id="modal-assignee" class="font-semibold"></p>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-gray-500 mb-2">Priority :</p>
+                <span
+                  id="modal-priority"
+                  class="badge bg-red-500 text-white border-none p-3.5"
+                ></span>
+              </div>
+            </div>
+            <div class="text-right">
+              <form method="dialog">
+                <button
+                  class="btn border-none rounded-md bg-purple-600 text-white hover:bg-purple-700"
+                >
+                  Close
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </div>
     </main>
 

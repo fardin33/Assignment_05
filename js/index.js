@@ -27,13 +27,14 @@ const loadIssues = () => {
     });
 };
 
-//================= Issues Count =================//
+//================= Function : Issues Count =================//
 const displayIssuesCount = (issues) => {
   const countElement = document.getElementById("issues-count");
   countElement.innerText = `${issues.length} Issues`;
 };
 
-//================= Display Issues Cards =================//
+//================= Function : Display Issues Cards =================//
+//================= Function : Display Issues Cards =================//
 const displayIssues = (issues) => {
   const issuesContainer = document.getElementById("issues-container");
 
@@ -47,10 +48,9 @@ const displayIssues = (issues) => {
   issues.forEach((issue) => {
     const card = document.createElement("div");
     card.innerHTML = `
-
        <!--================ Card Design ==============-->
           <div
-            class="border-t-4 border-[#00A96E] rounded-xl p-6 shadow-md hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[#4A00FF] transition w-full h-full">
+            class="border-t-4 border-[#00A96E] rounded-xl p-6 shadow-md hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[#575757] transition w-full h-full cursor-pointer">
             <div class="flex justify-between items-center mb-3">
               <img
                 src="./assets/images/Open-Status.png"
@@ -92,8 +92,33 @@ const displayIssues = (issues) => {
             <p class="text-sm text-[#64748B]">${issue.createdAt}</p>
           </div>
        `;
+
     // Append Container :
     issuesContainer.appendChild(card);
+
+    // ================= Modal Click Event =================
+    card.addEventListener("click", () => {
+      const modal = document.getElementById("issue_modal");
+
+      // Populate modal content dynamically
+      document.getElementById("modal-title").innerText = issue.title;
+      document.getElementById("modal-status").innerHTML = `
+        <span class="badge badge-success text-white">Opened</span>
+        <span ><i class="fa-solid fa-circle "></i> ${issue.author}</span>
+        <span ><i class="fa-solid fa-circle"></i> ${issue.createdAt}</span>
+      `;
+      document.getElementById("modal-tags").innerHTML = `
+        <span class="badge badge-outline bg-[#FEECEC] text-[#EF4444]">${issue.labels[0]?.toUpperCase()}</span>
+        <span class="badge badge-outline bg-yellow-100 text-[#D97706]">${issue.labels[1]?.toUpperCase()}</span>
+      `;
+      document.getElementById("modal-description").innerText =
+        issue.description;
+      document.getElementById("modal-assignee").innerText = issue.author;
+      document.getElementById("modal-priority").innerText = issue.priority;
+
+      modal.showModal();
+    });
   });
 };
+
 loadIssues();
