@@ -31,7 +31,7 @@ let allIssues = [];
 const issuesContainer = document.getElementById("issues-container");
 const loadingCard = document.getElementById("loading-card");
 
-//================ Helper: Show/Hide Loading ==================//
+//================ Show/Hide Loading ==================//
 const showLoading = () => {
   loadingCard.classList.remove("hidden");
   issuesContainer.classList.add("opacity-50");
@@ -42,7 +42,7 @@ const hideLoading = () => {
   issuesContainer.classList.remove("opacity-50");
 };
 
-//================ Helper: Show Issues With Loading ==================//
+//================ Show Issues With Loading ==================//
 const showWithLoading = (data) => {
   showLoading();
   const delay = new Promise((resolve) => setTimeout(resolve, 1000));
@@ -152,7 +152,7 @@ const displayIssues = (issues) => {
             <div class="flex flex-wrap gap-2 text-sm mt-2">
               <span><i class="fa-solid fa-circle"></i> ${singleIssue.author}</span>
               <span><i class="fa-solid fa-circle"></i> ${singleIssue.createdAt}</span>
-            /div>
+            </div>
           `;
 
           document.getElementById("modal-tags").innerHTML = `
