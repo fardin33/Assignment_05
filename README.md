@@ -1,7 +1,8 @@
 ==================== 01 ======================
 
--------------------- 1.1 VAR -----------------
-1️⃣ What is the difference between var, let, and const?
+----------------- 1.1 VAR -----------------
+
+1. What is the difference between var, let, and const?
 
 || var : var keyword is used to declare a variable In JavaScript.
          var is the old way of declaring variables in JavaScript.
@@ -22,7 +23,7 @@
 
 ===================== 02 =======================
 
-|| spread operator : 2️⃣ What is the spread operator (...)?
+|| spread operator : 2.What is the spread operator (...)?
 || Ans : Spread Operator (...) is used to expand or unpack elements of an array, 
          object, or iterable into individual elements.
 
@@ -36,7 +37,7 @@
 
 ===================== 03 ========================
 
-|| 3️⃣ What is the difference between map(), filter(), and forEach()?
+|| 3. What is the difference between map(), filter(), and forEach()?
 
 --------------------- 3.1 map() -----------------
 || map() : map() is an array method in JavaScript.
@@ -80,7 +81,7 @@
 
 ===================== 04 ========================
 
-|| Arrow Function : 4️⃣ What is an arrow function?
+|| Arrow Function : 4. What is an arrow function?
 || Ans : Arrow Function is a short way to write functions in JavaScript.
 
 || Syntax : (parameters) => {
@@ -97,7 +98,7 @@
 
 ===================== 05 ========================
 
-|| Template Literals : 5️⃣ What are template literals?
+|| Template Literals : 5. What are template literals?
 || Ans : Template literals are a way to create strings with embedded variables 
          and expressions in JavaScript.use backticks ( ) instead of single ' ' or 
          double " " quotes.
