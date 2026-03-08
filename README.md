@@ -12,6 +12,7 @@
 || Var Example : var name = "Jihad"; ||  var age = 22;
 
 --------------------- 1.2 LET -----------------
+
 || Let : let is a keyword used to declare a variable in JavaScript
 
 || Let Syntax : let variableName = value;
@@ -40,6 +41,7 @@
 || 3. What is the difference between map(), filter(), and forEach()?
 
 --------------------- 3.1 map() -----------------
+
 || map() : map() is an array method in JavaScript.
            It is used to create a new array by applying a function to each 
            element of the original array.
@@ -53,6 +55,7 @@
              console.log(result);            
 
 --------------------- 3.2 filter() -------------
+
 || filter() : in JavaScript filter() is an array method used to create a new array 
               containing elements that satisfy a condition.It checks each 
               element and keeps only the elements that return true.
@@ -64,6 +67,7 @@
              console.log(result);
 
 --------------------- 3.3 forEach() -------------
+
 || forEach() : in javascript forEach() is an array method used to loop through 
                each element ofan array.It performs an action for every 
                element but does not return a new array.
@@ -76,6 +80,7 @@
              numbers.forEach(num => {
              console.log(num * 2);
              });
+             
 ===================== 03 End ====================
 
 
