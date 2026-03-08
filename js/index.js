@@ -1,10 +1,8 @@
-//============ Login Function : ============//
+//==================== Login Function : ====================//
 function login() {
-  // Step - 01 : get username & pass using via Id :
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  // Step - 02 : Set Fixed username & Password :
   const requiredUserName = "admin";
   const requiredPassword = "admin123";
 
@@ -15,15 +13,20 @@ function login() {
   }
 }
 
-//============ Home Page All Function ===========//
+//================ Home Page All Function ==================//
+
+// Global Variable
+let allIssues = [];
 
 //============ Function : Fetch & Load Issues APi ===========//
 const loadIssues = () => {
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((response) => response.json())
     .then((json) => {
-      displayIssuesCount(json.data);
-      displayIssues(json.data);
+      allIssues = json.data;
+
+      displayIssuesCount(allIssues);
+      displayIssues(allIssues);
     });
 };
 
@@ -33,8 +36,7 @@ const displayIssuesCount = (issues) => {
   countElement.innerText = `${issues.length} Issues`;
 };
 
-//================= Function : Display Issues Cards =================//
-//================= Function : Display Issues Cards =================//
+//============= Function : Display Issues Cards =============//
 const displayIssues = (issues) => {
   const issuesContainer = document.getElementById("issues-container");
 
@@ -46,29 +48,35 @@ const displayIssues = (issues) => {
   }
 
   issues.forEach((issue) => {
+    const borderColor =
+      issue.status === "closed" ? "border-purple-500" : "border-green-500";
+
+    //=================== Card-level Status Image ===================//
+    const statusImage =
+      issue.status.toLowerCase() === "closed"
+        ? "./assets/images/Closed.png"
+        : "./assets/images/Open.png";
+
     const card = document.createElement("div");
+
     card.innerHTML = `
-       <!--================ Card Design ==============-->
-          <div
-            class="border-t-4 border-[#00A96E] rounded-xl p-6 shadow-md hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[#575757] transition w-full h-full cursor-pointer">
+       <div
+            class="border-t-5 ${borderColor} rounded-xl p-6 shadow-md hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[#575757] transition w-full h-full cursor-pointer">
             <div class="flex justify-between items-center mb-3">
               <img
-                src="./assets/images/Open-Status.png"
-                alt="Not Found"
+                src="${statusImage}"
+                alt="Status Image"
                 class="w-9 h-9"/>
 
-              <!--======= Priority ======-->
               <span
                 class="bg-[#FEECEC] text-[#EF4444] font-medium text-[13px] px-5 py-1.5 rounded-full"
                 >${issue.priority.toUpperCase()}</span>
             </div>
 
-            <!--====== Title ======-->
             <h3 class="font-semibold text-[17px] mb-1 mt-5">
               ${issue.title}
             </h3>
 
-            <!--====== description ======-->
             <p class="text-[14px] text-gray-500 mb-4">
                ${issue.description}
             </p>
@@ -93,57 +101,175 @@ const displayIssues = (issues) => {
           </div>
        `;
 
-    // Append Container :
     issuesContainer.appendChild(card);
 
-    // ================= Modal Click Event =================
+    //================= Function : Modal Click =================//
     card.addEventListener("click", () => {
       const modal = document.getElementById("issue_modal");
 
-      // Populate modal content dynamically
-      document.getElementById("modal-title").innerText = issue.title;
+      fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${issue.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const singleIssue = data.data;
 
-      // Status section with responsive layout
-      document.getElementById("modal-status").className =
-        "flex flex-col sm:flex-row sm:items-center gap-2 lg:gap-3 mb-4";
-      document.getElementById("modal-status").innerHTML = `
-    <!-- Status badge always first row on small screens -->
-    <span class="badge badge-success text-white text-sm lg:text-base">${issue.status || "Opened"}</span>
+          document.getElementById("modal-title").innerText = singleIssue.title;
 
-    <!-- Author + Date go to second row on small screens -->
-    <div class="flex flex-wrap gap-2 text-sm lg:text-base">
-      <span><i class="fa-solid fa-circle"></i> ${issue.author}</span>
-      <span><i class="fa-solid fa-circle"></i> ${issue.createdAt}</span>
-    </div>
-  `;
+          document.getElementById("modal-status").className =
+            "flex flex-col sm:flex-row sm:items-center gap-2 lg:gap-3 mb-4";
 
-      // Tags section with wrapping
-      document.getElementById("modal-tags").className =
-        "flex flex-wrap gap-2 lg:gap-3 mb-4";
-      document.getElementById("modal-tags").innerHTML = `
-    <span class="badge badge-outline bg-[#FEECEC] text-[#EF4444] text-sm lg:text-base">${issue.labels[0]?.toUpperCase()}</span>
-    <span class="badge badge-outline bg-yellow-100 text-[#D97706] text-sm lg:text-base">${issue.labels[1]?.toUpperCase()}</span>
-  `;
+          //====== Dynamic Status Badge & Image =======//
+          const statusText =
+            singleIssue.status.toLowerCase() === "closed" ? "Closed" : "Opened";
+          const statusColor =
+            singleIssue.status.toLowerCase() === "closed"
+              ? "bg-purple-500"
+              : "bg-green-500";
 
-      // Description
-      document.getElementById("modal-description").className =
-        "text-gray-600 text-sm lg:text-base mb-6";
-      document.getElementById("modal-description").innerText =
-        issue.description;
+          // Set Closed / Opened Status Image :
+          const statusImageModal =
+            singleIssue.status.toLowerCase() === "closed"
+              ? "./assets/images/Closed.png"
+              : "./assets/images/Open.png";
 
-      // Assignee
-      document.getElementById("modal-assignee").className =
-        "font-semibold text-sm lg:text-base";
-      document.getElementById("modal-assignee").innerText = issue.author;
+          document.getElementById("modal-status").innerHTML = `
+            <div class="flex items-center gap-2">
+              <img src="${statusImageModal}" alt="Status Image" class="w-6 h-6"/>
+              <span class="badge text-white text-sm lg:text-base ${statusColor}">
+                ${statusText}
+              </span>
+            </div>
 
-      // Priority
-      document.getElementById("modal-priority").className =
-        "badge bg-red-500 text-white border-none p-3 text-sm lg:text-base";
-      document.getElementById("modal-priority").innerText = issue.priority;
+            <div class="flex flex-wrap gap-2 text-sm lg:text-base mt-2">
+              <span><i class="fa-solid fa-circle"></i> ${singleIssue.author}</span>
+              <span><i class="fa-solid fa-circle"></i> ${singleIssue.createdAt}</span>
+            </div>
+          `;
 
-      modal.showModal();
+          document.getElementById("modal-tags").className =
+            "flex flex-wrap gap-2 lg:gap-3 mb-4";
+
+          document.getElementById("modal-tags").innerHTML = `
+            <span class="badge badge-outline bg-[#FEECEC] text-[#EF4444] text-sm lg:text-base">
+              ${singleIssue.labels[0]?.toUpperCase()}
+            </span>
+
+            <span class="badge badge-outline bg-yellow-100 text-[#D97706] text-sm lg:text-base">
+              ${singleIssue.labels[1]?.toUpperCase()}
+            </span>
+          `;
+
+          document.getElementById("modal-description").className =
+            "text-gray-600 text-sm lg:text-base mb-6";
+
+          document.getElementById("modal-description").innerText =
+            singleIssue.description;
+
+          document.getElementById("modal-assignee").className =
+            "font-semibold text-sm lg:text-base";
+
+          document.getElementById("modal-assignee").innerText =
+            singleIssue.author;
+
+          document.getElementById("modal-priority").className =
+            "badge bg-red-500 text-white border-none p-3 text-sm lg:text-base";
+
+          document.getElementById("modal-priority").innerText =
+            singleIssue.priority;
+
+          modal.showModal();
+        });
     });
   });
 };
 
+//=============== Function : Toggling - All,open,closed =============//
+const filterIssues = (status) => {
+  if (status === "all") {
+    displayIssues(allIssues);
+    displayIssuesCount(allIssues);
+    return;
+  }
+
+  const filtered = allIssues.filter(
+    (issue) => issue.status.toLowerCase() === status,
+  );
+
+  displayIssues(filtered);
+  displayIssuesCount(filtered);
+};
+
+//================= Active Button Style Function =====================//
+const setActiveButton = (clickedBtn) => {
+  const buttons = document.querySelectorAll("#all-btn, #open-btn, #closed-btn");
+
+  buttons.forEach((btn) => {
+    btn.classList.remove(
+      "bg-[#4A00FF]",
+      "text-white",
+      "hover:bg-[#4A00FF]",
+      "hover:bg-gray-100",
+    );
+    btn.classList.add("text-gray-600");
+
+    if (btn !== clickedBtn) {
+      btn.classList.add("hover:bg-gray-100");
+    }
+  });
+
+  clickedBtn.classList.add("bg-[#4A00FF]", "text-white");
+  clickedBtn.classList.remove("text-gray-600");
+
+  clickedBtn.classList.remove("hover:bg-gray-100");
+};
+
+//=============== Button Events & On click To Action : =============//
+document.getElementById("all-btn").addEventListener("click", (e) => {
+  filterIssues("all");
+  setActiveButton(e.target);
+});
+
+document.getElementById("open-btn").addEventListener("click", (e) => {
+  filterIssues("open");
+  setActiveButton(e.target);
+});
+
+document.getElementById("closed-btn").addEventListener("click", (e) => {
+  filterIssues("closed");
+  setActiveButton(e.target);
+});
+
+//==================== Search Input Event ====================//
+const searchInput = document.getElementById("search-input"); //
+if (searchInput) {
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value;
+    searchIssues(query);
+  });
+}
+
+//==================== Search Function & API Call ====================//
+const searchIssues = (searchText) => {
+  if (!searchText || searchText.trim() === "") {
+    displayIssues(allIssues);
+    displayIssuesCount(allIssues);
+    return;
+  }
+
+  fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(searchText)}`,
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const searchResults = data.data || [];
+      displayIssues(searchResults);
+      displayIssuesCount(searchResults);
+    })
+    .catch((err) => {
+      console.error("Search API Error:", err);
+      const issuesContainer = document.getElementById("issues-container");
+      issuesContainer.innerHTML = `<p class="text-center col-span-full text-red-500">Error fetching search results</p>`;
+    });
+};
+
+// Initial Load
 loadIssues();

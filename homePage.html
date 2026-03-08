@@ -54,6 +54,7 @@
           class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 w-full sm:w-auto"
         >
           <input
+            id="search-input"
             type="text"
             placeholder="Search issue.."
             class="border border-[#E4E4E7] rounded-lg px-4 py-2 text-md w-full sm:w-72 focus:outline-none focus:ring-2 focus:ring-[#4A00FF] mb-1"
@@ -67,7 +68,6 @@
         </div>
       </div>
     </header>
-
     <!-- Main Section -->
     <main class="w-full lg:w-[85%] mx-auto px-6 py-8 min-h-screen">
       <!--================= All, Open , Closed Tabs =============-->
@@ -75,18 +75,21 @@
         class="bg-white w-full rounded-lg shadow-sm p-3 sm:p-5 flex flex-wrap gap-2"
       >
         <button
+          id="all-btn"
           class="bg-[#4A00FF] text-white px-8 py-1 rounded-md text-md font-medium border border-[#E4E4E7]"
         >
           All
         </button>
 
         <button
+          id="open-btn"
           class="text-gray-600 px-8 py-1 text-md font-medium hover:bg-gray-100 rounded-md border border-[#E4E4E7]"
         >
           Open
         </button>
 
         <button
+          id="closed-btn"
           class="text-gray-600 px-8 py-1 text-md font-medium hover:bg-gray-100 rounded-md border border-[#E4E4E7]"
         >
           Closed
