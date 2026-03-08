@@ -61,44 +61,54 @@ const displayIssues = (issues) => {
 
     card.innerHTML = `
        <div
-            class="border-t-5 ${borderColor} rounded-xl p-6 shadow-md hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[#575757] transition w-full h-full cursor-pointer">
-            <div class="flex justify-between items-center mb-3">
-              <img
-                src="${statusImage}"
-                alt="Status Image"
-                class="w-9 h-9"/>
+  class="border-t-5 ${borderColor} rounded-xl p-6 lg:p-6 md:p-4 shadow-md hover:shadow-[0_4px_8px_rgba(0,0,0,0.15)] hover:shadow-[#575757] transition w-full h-full cursor-pointer"
+>
+  <div class="flex justify-between items-center mb-3">
+    <img
+      src="${statusImage}"
+      alt="Status Image"
+      class="w-9 h-9 lg:w-9 lg:h-9 md:w-7 md:h-7"
+    />
 
-              <span
-                class="bg-[#FEECEC] text-[#EF4444] font-medium text-[13px] px-5 py-1.5 rounded-full"
-                >${issue.priority.toUpperCase()}</span>
-            </div>
+    <span
+      class="bg-[#FEECEC] text-[#EF4444] font-medium text-[13px] lg:text-[13px] md:text-[11px] px-5 lg:px-5 md:px-3 py-1.5 rounded-full"
+      >${issue.priority.toUpperCase()}</span
+    >
+  </div>
 
-            <h3 class="font-semibold text-[17px] mb-1 mt-5">
-              ${issue.title}
-            </h3>
+  <h3 class="font-semibold text-[17px] lg:text-[17px] md:text-[14px] mb-1 mt-5">
+    ${issue.title}
+  </h3>
 
-            <p class="text-[14px] text-gray-500 mb-4">
-               ${issue.description}
-            </p>
+  <p class="text-[14px] lg:text-[14px] md:text-[12px] text-gray-500 mb-4">
+    ${issue.description}
+  </p>
 
-          <div
-          class="flex gap-2 mb-4 items-center pb-8 border-b-2 border-[#E4E4E7]">
-          <span
-          class="bg-[#FEECEC] text-[#EF4444] font-medium text-xs px-4 py-1.5 rounded-full">
-          <i class="fa-solid fa-bug"></i>
-          ${issue.labels[0]?.toUpperCase()}
-          </span>
+  <div
+    class="flex gap-2 mb-4 items-center pb-8 border-b-2 border-[#E4E4E7] flex-wrap"
+  >
+    <span
+      class="bg-[#FEECEC] text-[#EF4444] font-medium text-xs lg:text-xs md:text-[10px] px-4 lg:px-4 md:px-2 py-1.5 rounded-full flex items-center gap-1"
+    >
+      <i class="fa-solid fa-bug"></i>
+      ${issue.labels[0]?.toUpperCase()}
+    </span>
 
-          <span
-          class="bg-yellow-100 text-[#D97706] text-xs font-medium px-3 py-1.5 rounded-full">
-          <i class="fa-solid fa-life-ring"></i>
-          ${issue.labels[1]?.toUpperCase()}
-          </span>
-          </div>
+    <span
+      class="bg-yellow-100 text-[#D97706] text-xs lg:text-xs md:text-[10px] font-medium px-3 lg:px-3 md:px-2 py-1.5 rounded-full flex items-center gap-1"
+    >
+      <i class="fa-solid fa-life-ring"></i>
+      ${issue.labels[1]?.toUpperCase()}
+    </span>
+  </div>
 
-            <p class="text-sm text-[#64748B] mb-2">${issue.author}</p>
-            <p class="text-sm text-[#64748B]">${issue.createdAt}</p>
-          </div>
+  <p class="text-sm lg:text-sm md:text-[12px] text-[#64748B] mb-2">
+    ${issue.author}
+  </p>
+  <p class="text-sm lg:text-sm md:text-[12px] text-[#64748B]">
+    ${issue.createdAt}
+  </p>
+</div>
        `;
 
     issuesContainer.appendChild(card);
@@ -238,25 +248,32 @@ document.getElementById("closed-btn").addEventListener("click", (e) => {
   setActiveButton(e.target);
 });
 
-//==================== Search Input Event ====================//
-const searchInput = document.getElementById("search-input"); //
-if (searchInput) {
-  searchInput.addEventListener("input", (e) => {
-    const query = e.target.value;
+//==================== Search Button Click ====================//
+const searchInput = document.getElementById("search-input");
+const searchButton = document.querySelector(
+  'button[type="button"]', // যেটি search button
+);
+
+if (searchButton && searchInput) {
+  searchButton.addEventListener("click", () => {
+    const query = searchInput.value.trim();
     searchIssues(query);
   });
 }
 
 //==================== Search Function & API Call ====================//
 const searchIssues = (searchText) => {
-  if (!searchText || searchText.trim() === "") {
+  if (!searchText) {
+    // যদি খালি থাকে, সব issues দেখাবে
     displayIssues(allIssues);
     displayIssuesCount(allIssues);
     return;
   }
 
   fetch(
-    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(searchText)}`,
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${encodeURIComponent(
+      searchText,
+    )}`,
   )
     .then((res) => res.json())
     .then((data) => {
