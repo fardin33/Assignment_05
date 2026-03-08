@@ -188,6 +188,27 @@
             </div>
           </div>
         </dialog>
+
+        <!-- Loading Ui -->
+        <div
+          id="issues-container"
+          class="grid gap-5 grid-cols-1 lg:grid-cols-4 auto-rows-auto"
+        >
+          <!-- Cards will be injected here -->
+        </div>
+
+        <!-- Loading Indicator -->
+        <!-- Loading Card -->
+        <div
+          id="loading-card"
+          class="hidden fixed inset-0 flex items-center justify-center z-50"
+        >
+          <div
+            class="bg-white p-6 rounded-xl shadow-lg w-40 h-40 flex items-center justify-center"
+          >
+            <span class="loading loading-dots loading-lg text-gray-500"></span>
+          </div>
+        </div>
       </div>
     </main>
 
