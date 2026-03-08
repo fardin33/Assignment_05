@@ -12,8 +12,20 @@ function login() {
     alert("Wrong Credentials, Please Try Again");
   }
 }
+function togglePassword() {
+  const passwordInput = document.getElementById("password");
+  const icon = document.getElementById("eyeIcon");
 
-//================ Global Variables & DOM References ==================//
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text"; // password show
+    icon.textContent = "🐵"; // monkey icon
+  } else {
+    passwordInput.type = "password"; // password hide
+    icon.textContent = "🙈"; // hide icon
+  }
+}
+
+//================ Global Variables & DOM  ==================//
 let allIssues = [];
 
 const issuesContainer = document.getElementById("issues-container");
@@ -140,7 +152,7 @@ const displayIssues = (issues) => {
             <div class="flex flex-wrap gap-2 text-sm mt-2">
               <span><i class="fa-solid fa-circle"></i> ${singleIssue.author}</span>
               <span><i class="fa-solid fa-circle"></i> ${singleIssue.createdAt}</span>
-            </div>
+            /div>
           `;
 
           document.getElementById("modal-tags").innerHTML = `
