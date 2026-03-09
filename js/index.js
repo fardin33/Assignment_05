@@ -21,7 +21,7 @@ function togglePassword() {
     icon.textContent = "🐵"; // monkey icon
   } else {
     passwordInput.type = "password"; // password hide
-    icon.textContent = "🙈"; // hide icon
+    icon.textContent = "🙈"; // hide icon 
   }
 }
 
